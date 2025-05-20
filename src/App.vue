@@ -1,10 +1,19 @@
 <script>
+import { ref } from 'vue'
+
 export default {
   setup () {
-    const message = "Hello"
+    const message = ref("Hello")
+    const quantity = ref(1)
+
+    const increment = () => quantity.value++
+    const decrement = () => quantity.value--
 
     return {
-      message
+      message,
+      quantity,
+      increment,
+      decrement
     }
   }
 }
@@ -12,6 +21,9 @@ export default {
 
 <template>
   <h1>{{ message }}</h1>
+  <h2>{{ quantity }}</h2>
+  <button @click="increment">+</button>
+  <button @click="decrement">-</button>
 </template>
 
 <style scoped>
