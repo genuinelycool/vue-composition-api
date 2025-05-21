@@ -1,38 +1,26 @@
-<script>
+<script setup>
 import { computed, reactive, toRefs } from 'vue'
 
-export default {
-    props: {
-        cartItem: {
-            type: Object,
-            required: true
-        }
-    },
-    emits: ['remove'],
-  setup (props, { emit }) {
-    const item = reactive(props.cartItem)
-
-    const increment = () => item.quantity++
-
-    const decrement = () => item.quantity--
-
-    const total = computed(() => item.price * item.quantity)
-
-    const { name, price, quantity } = toRefs(item)
-
-    const remove = () => emit('remove', item)
-
-    return {
-        remove,
-      quantity,
-      increment,
-      decrement,
-      name,
-      price,
-      total
+const props = defineProps({
+    cartItem: {
+        type: Object,
+        required: true
     }
-  }
-}
+})
+
+const emit = defineEmits(['remove'])
+
+const item = reactive(props.cartItem)
+
+const increment = () => item.quantity++
+
+const decrement = () => item.quantity--
+
+const total = computed(() => item.price * item.quantity)
+
+const { name, price, quantity } = toRefs(item)
+
+const remove = () => emit('remove', item)
 </script>
 
 <template>
